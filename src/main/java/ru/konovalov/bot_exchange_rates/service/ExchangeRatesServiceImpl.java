@@ -2,11 +2,11 @@ package ru.konovalov.bot_exchange_rates.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import ru.konovalov.bot_exchange_rates.client.ClientCbr;
 import ru.konovalov.bot_exchange_rates.exception.ServiceException;
 
-import javax.swing.text.Document;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -14,7 +14,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 
 @Service
-public class ExchangeRatesServiceImpl implements ExchangeRatesService{
+public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     private static final String USD_XPATH = "/ValCurs//Valute[@ID='R01235']/Value";
     private static final String EUR_XPATH = "/ValCurs//Valute[@ID='R01239']/Value";
@@ -43,11 +43,11 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService{
 
     private static String extractCurrencyValueFromXml(String xml, String xPathExpression) throws ServiceException {
         InputSource source = new InputSource(new StringReader(xml));
-        try{
+        try {
             XPath xPath = XPathFactory.newInstance().newXPath();
             Document document = (Document) xPath.evaluate("/", source, XPathConstants.NODE);
-            return xPath.evaluate(xPathExpression,document);
-        } catch (XPathExpressionException ex){
+            return xPath.evaluate(xPathExpression, document);
+        } catch (XPathExpressionException ex) {
             throw new ServiceException("Не удалось распарсить xml", ex);
         }
     }
