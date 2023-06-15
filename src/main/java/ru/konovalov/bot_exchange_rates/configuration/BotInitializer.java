@@ -1,10 +1,7 @@
 package ru.konovalov.bot_exchange_rates.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -29,17 +26,4 @@ public class BotInitializer {
             log.error("Ошибка: " + ex.getMessage());
         }
     }
-
-//    @Bean
-//    public TelegramBotsApi telegramBotsApi(BotExchangeRates botExchangeRates){
-//        try {
-//            TelegramBotsApi api = new TelegramBotsApi(DefaultBotSession.class);
-//            api.registerBot(botExchangeRates);
-//            return api;
-//        } catch (TelegramApiException ex) {
-//            log.error("Ошибка: " + ex.getMessage());
-//            throw new RuntimeException(ex);
-//        }
-//    }
-
 }

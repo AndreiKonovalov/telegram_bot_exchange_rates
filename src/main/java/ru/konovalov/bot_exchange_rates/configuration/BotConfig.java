@@ -19,8 +19,6 @@ public class BotConfig {
     @Value("${bot.token}")
     String token;
 
-    //    @Value("${bot.owner}")
-//    Long ownerId;
     @Bean
     public OkHttpClient okHttpClient() {
         return new OkHttpClient();
