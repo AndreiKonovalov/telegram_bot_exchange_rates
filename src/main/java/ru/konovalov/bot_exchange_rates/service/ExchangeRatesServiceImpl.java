@@ -1,5 +1,6 @@
 package ru.konovalov.bot_exchange_rates.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -14,6 +15,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 
 @Service
+@Slf4j
 public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     private static final String USD_XPATH = "/ValCurs//Valute[@ID='R01235']/Value";
@@ -48,6 +50,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
             Document document = (Document) xPath.evaluate("/", source, XPathConstants.NODE);
             return xPath.evaluate(xPathExpression, document);
         } catch (XPathExpressionException ex) {
+            log.error("Ошибка: " + ex.getMessage());
             throw new ServiceException("Не удалось распарсить xml", ex);
         }
     }
