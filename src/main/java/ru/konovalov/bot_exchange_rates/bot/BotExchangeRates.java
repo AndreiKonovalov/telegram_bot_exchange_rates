@@ -70,8 +70,8 @@ public class BotExchangeRates extends TelegramLongPollingBot {
             case EUR -> eurCommand(chatId);
             case CNY -> cnyCommand(chatId);
             case HELP -> helpCommand(chatId);
-            case MYDATA -> myDataCommand(update.getMessage());
-            case DELETEDATA -> deleteDataCommand(update.getMessage());
+//            case MYDATA -> myDataCommand(update.getMessage());
+//            case DELETEDATA -> deleteDataCommand(update.getMessage());
             default -> unknownCommand(chatId);
         }
     }
