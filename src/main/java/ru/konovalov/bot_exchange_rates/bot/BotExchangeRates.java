@@ -44,8 +44,8 @@ public class BotExchangeRates extends TelegramLongPollingBot {
     @Autowired
     private ExchangeRatesService exchangeRatesService;
 
-    @Autowired
-    private UserRepository repository;
+//    @Autowired
+//    private UserRepository repository;
 
     public BotExchangeRates(BotConfig config) {
         this.config = config;
@@ -64,7 +64,7 @@ public class BotExchangeRates extends TelegramLongPollingBot {
         String userName = update.getMessage().getChat().getUserName();
         switch (message) {
             case START ->{
-                    registerUser(update.getMessage());
+//                    registerUser(update.getMessage());
                     startCommand(chatId, userName);}
             case USD -> usdCommand(chatId);
             case EUR -> eurCommand(chatId);
@@ -76,33 +76,33 @@ public class BotExchangeRates extends TelegramLongPollingBot {
         }
     }
 
-    private void deleteDataCommand(Message message) {
-        if (repository.findById(message.getChatId()).isPresent()){
-            repository.deleteById(message.getChatId());
-            sendMessage(message.getChatId(), "Ваши данные удалены!");
-        }
-        else {
-            sendMessage(message.getChatId(), "У вас нет сохраненных данных!");
-        }
-    }
+//    private void deleteDataCommand(Message message) {
+//        if (repository.findById(message.getChatId()).isPresent()){
+//            repository.deleteById(message.getChatId());
+//            sendMessage(message.getChatId(), "Ваши данные удалены!");
+//        }
+//        else {
+//            sendMessage(message.getChatId(), "У вас нет сохраненных данных!");
+//        }
+//    }
+//
+//    private void myDataCommand(Message message) {
+//        if (repository.findById(message.getChatId()).isPresent()){
+//            UserEntity user = repository.findById(message.getChatId()).get();
+//            sendMessage(message.getChatId(), user.toString());
+//        }
+//        else {
+//            sendMessage(message.getChatId(), "У вас нет сохраненных данных!");
+//        }
+//    }
 
-    private void myDataCommand(Message message) {
-        if (repository.findById(message.getChatId()).isPresent()){
-            UserEntity user = repository.findById(message.getChatId()).get();
-            sendMessage(message.getChatId(), user.toString());
-        }
-        else {
-            sendMessage(message.getChatId(), "У вас нет сохраненных данных!");
-        }
-    }
-
-    private void registerUser(Message message) {
-        if (repository.findById(message.getChatId()).isEmpty()){
-            Long chatId = message.getChatId();
-            Chat chat = message.getChat();
-            saveUser(chatId, chat);
-        }
-    }
+//    private void registerUser(Message message) {
+//        if (repository.findById(message.getChatId()).isEmpty()){
+//            Long chatId = message.getChatId();
+//            Chat chat = message.getChat();
+//            saveUser(chatId, chat);
+//        }
+//    }
 
     private void saveUser(Long chatId, Chat chat) {
         UserEntity user = new UserEntity();
@@ -112,7 +112,7 @@ public class BotExchangeRates extends TelegramLongPollingBot {
         user.setUserName(chat.getUserName());
         user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
 
-        repository.save(user);
+//        repository.save(user);
         log.info("Пользователь добавлен: " + user);
     }
 
