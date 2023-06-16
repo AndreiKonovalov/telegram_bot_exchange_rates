@@ -17,8 +17,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.konovalov.bot_exchange_rates.configuration.BotConfig;
 import ru.konovalov.bot_exchange_rates.exception.ServiceException;
-import ru.konovalov.bot_exchange_rates.model.UserEntity;
-import ru.konovalov.bot_exchange_rates.repository.UserRepository;
 import ru.konovalov.bot_exchange_rates.service.ExchangeRatesService;
 
 import java.sql.Timestamp;
@@ -104,17 +102,17 @@ public class BotExchangeRates extends TelegramLongPollingBot {
 //        }
 //    }
 
-    private void saveUser(Long chatId, Chat chat) {
-        UserEntity user = new UserEntity();
-        user.setChatId(chatId);
-        user.setFirstName(chat.getFirstName());
-        user.setLastName(chat.getLastName());
-        user.setUserName(chat.getUserName());
-        user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
-
-//        repository.save(user);
-        log.info("Пользователь добавлен: " + user);
-    }
+//    private void saveUser(Long chatId, Chat chat) {
+//        UserEntity user = new UserEntity();
+//        user.setChatId(chatId);
+//        user.setFirstName(chat.getFirstName());
+//        user.setLastName(chat.getLastName());
+//        user.setUserName(chat.getUserName());
+//        user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
+//
+////        repository.save(user);
+//        log.info("Пользователь добавлен: " + user);
+//    }
 
     @Override
     public String getBotUsername() {
